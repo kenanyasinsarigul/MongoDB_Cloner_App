@@ -1,6 +1,3 @@
-# 
-Mongo Database Cloner App developed with NodeJs and VueJs
-
 [![Contributors][contributors-shield]][contributors-url]
 [![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
@@ -25,8 +22,8 @@ Mongo Database Cloner App developed with NodeJs and VueJs
 
 ## Screenshots of The Project
 
-<img width="1440" alt="Screenshot_2022-11-25_at_10 46 43" src="https://user-images.githubusercontent.com/51781007/203929311-4eb56337-f42f-4b66-a2c6-64c9b0355bdf.png">
 <img width="1440" alt="Screenshot_2022-11-25_at_10 46 15" src="https://user-images.githubusercontent.com/51781007/203929333-663dda1a-4658-405e-a4dc-ea9a2096779f.png">
+<img width="1440" alt="Screenshot_2022-11-25_at_10 46 43" src="https://user-images.githubusercontent.com/51781007/203929311-4eb56337-f42f-4b66-a2c6-64c9b0355bdf.png">
 
 # Create Image
 
