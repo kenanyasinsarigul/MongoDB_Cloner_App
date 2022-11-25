@@ -56,3 +56,16 @@ then go to -> http://localhost:9090
 
 ## Author
 Kenan Yasin SARIGÜL - <a href="https://github.com/kenanyasinsarigul/">Github</a>
+
+[contributors-shield]: https://img.shields.io/github/contributors/kenanyasinsarigul/MongoDB_Cloner_App.svg?style=for-the-badge
+[contributors-url]: https://github.com/kenanyasinsarigul/MongoDB_Cloner_App/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/kenanyasinsarigul/MongoDB_Cloner_App.svg?style=for-the-badge
+[forks-url]: https://github.com/kenanyasinsarigul/MongoDB_Cloner_App/network/members
+[stars-shield]: https://img.shields.io/github/stars/kenanyasinsarigul/MongoDB_Cloner_App.svg?style=for-the-badge
+[stars-url]: https://github.com/kenanyasinsarigul/MongoDB_Cloner_App/stargazers
+[issues-shield]: https://img.shields.io/github/issues/kenanyasinsarigul/MongoDB_Cloner_App.svg?style=for-the-badge
+[issues-url]: https://github.com/kenanyasinsarigul/MongoDB_Cloner_App/issues
+[license-shield]: https://img.shields.io/github/license/kenanyasinsarigul/MongoDB_Cloner_App.svg?style=for-the-badge
+[license-url]: https://github.com/kenanyasinsarigul/MongoDB_Cloner_App/blob/master/LICENSE.txt
+[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
+[linkedin-url]: https://www.linkedin.com/in/kenan-yasin-sar%C4%B1g%C3%BCl-155379188/
