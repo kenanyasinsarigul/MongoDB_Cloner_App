@@ -20,6 +20,8 @@
   </p>
 </p>
 
+<br>
+
 ## Screenshots of The Project
 
 <img width="1440" alt="Screenshot_2022-11-25_at_10 46 15" src="https://user-images.githubusercontent.com/51781007/203929333-663dda1a-4658-405e-a4dc-ea9a2096779f.png">
