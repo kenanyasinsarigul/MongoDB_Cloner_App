@@ -30,7 +30,7 @@ then go to -> http://localhost:9090
 </ul>
 
 ## Acknowledgements
-- Tugay İPEK- <a href="https://github.com/tugayipek1/">Github</a>
+- Tugay İPEK - <a href="https://github.com/tugayipek1/">Github</a>
 
 ## Author
-Kenan Yasin SARIGÜL- <a href="https://github.com/kenanyasinsarigul/">Github</a>
+Kenan Yasin SARIGÜL - <a href="https://github.com/kenanyasinsarigul/">Github</a>
