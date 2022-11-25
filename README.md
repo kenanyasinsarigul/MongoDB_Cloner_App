@@ -23,3 +23,14 @@ docker run -p 9090:8080 -e DB_CONNECTION=mongodb://host.docker.internal:27017/cl
 ```
 
 then go to -> http://localhost:9090
+
+## Used Technologies
+<ul>
+  <li>NodeJs, VueJs2, Postman, MongoDb, Docker, VsCode, Bootstrap</li>
+</ul>
+
+## Acknowledgements
+- Tugay İPEK- <a href="https://github.com/tugayipek1/">Github</a>
+
+## Author
+Kenan Yasin SARIGÜL- <a href="https://github.com/kenanyasinsarigul/">Github</a>
