@@ -3,6 +3,7 @@ import VueRouter from "vue-router";
 import Router from "vue-router";
 import HomeView from "../views/HomeView";
 import EnvironmentView from "../views/Environment";
+import Schedule from "../views/Schedule";
 import { FRONTEND_URL } from "../config/index";
 
 Vue.use(VueRouter);
@@ -19,6 +20,10 @@ export default new Router({
     {
       path: "/environments",
       component: EnvironmentView,
+    },
+    {
+      path: "/schedule",
+      component: Schedule,
     },
   ],
 });

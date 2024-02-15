@@ -4,7 +4,8 @@ class Repository {
   }
 
   async findAll() {
-    return this.model.find();
+    const response = await this.model.find();
+    return response.map((i) => i.toObject());
   }
 
   async findById(entityId) {

@@ -7,6 +7,12 @@ const JobItemService = require("../../job-item/service/JobItem");
 router.post("/", async (req, res) => {
   const cloner = await ClonerService.save(req.body);
 
+  return res.json({ job: cloner.job });
+});
+
+router.post("/clone-time", async (req, res) => {
+  const cloner = await ClonerService.saveWithSchedule(req.body);
+
   return res.json(cloner);
 });
 

@@ -1,16 +1,105 @@
 const JobService = require("../../job/service/Job");
 const JobItemService = require("../../job-item/service/JobItem");
+const ScheduleConfigService = require("../../scheduleConfig/service/ScheduleConfig");
 const MongoClient = require("mongodb").MongoClient;
 const { PAGINATION_LIMIT } = require("../../../config/index");
+const nodemailer = require("nodemailer");
 
 //
 const mongoose = require("mongoose");
+const { response } = require("express");
 const ObjectId = mongoose.Types.ObjectId;
 //
+
+Date.prototype.addHours = function (h) {
+  this.setTime(this.getTime() + h * 60 * 60 * 1000);
+  return this;
+};
+
+function createBackupName(environment) {
+  const date = new Date();
+  date.addHours(3);
+  return environment.toLowerCase().split("ı").join("i").split(" ").join("") + "_" + date.getDate() + "_" + (date.getMonth() + 1) + "_" + date.getHours() + "_" + date.getMinutes();
+}
+
 class ClonerService {
   get(jobId) {
     return JobService.findById(jobId);
   }
+
+  async saveWithSchedule() {
+    const entity = await ScheduleConfigService.findAll();
+    const payload = entity[0];
+
+    const response = await Promise.all(
+      payload.sources.map(async (source) => {
+        const cloneJob = {
+          source,
+          target: { ...payload.target, dbName: createBackupName(source.name) },
+        };
+
+        try {
+          const job = await this.save(cloneJob);
+          return {
+            ...cloneJob,
+            ...job,
+          };
+        } catch (error) {
+          console.error(error);
+          return {
+            ...cloneJob,
+            job: { end: new Date(), status: "fail", anyError: true },
+          };
+        }
+      })
+    );
+
+    this.sendMail(response);
+  }
+
+  async sendMail(response) {
+    try {
+      const content = response
+        .map((job) => {
+          return `
+        <span style='color:${job.job.anyError ? "red" : "green"}'>hasAnyError: ${job.job.anyError}</span><br>
+        status: ${job.job.status}<br>
+        at: ${job.job.end}<br>
+        <br><br>
+        source name:${job.source.name}<br>
+        source connection: ${job.source.connection}<br>
+        source dbName:${job.source.dbName}<br>
+        <br><br>
+        target name:${job.target.name}<br>
+        target connection: ${job.target.connection}<br>
+        target dbName:${job.target.dbName}<br>
+      
+      `;
+        })
+        .join("<hr>");
+
+      const transporter = nodemailer.createTransport({
+        host: process.env.EMAIL_HOST,
+        port: process.env.EMAIL_PORT,
+        secure: false,
+        auth: {
+          user: process.env.EMAIL_ACCOUNT,
+          pass: process.env.EMAIL_PWD,
+        },
+      });
+      console.log("mail gönderiliyor..");
+      await transporter.sendMail({
+        from: process.env.EMAIL_FROM,
+        to: process.env.EMAIL_TO,
+        subject: (response.some((i) => i.job.anyError) ? "⛔️" : "✅") + " Tunesoft Regtech Backup Tool",
+        html: content,
+      });
+      console.log("mail gönderildi");
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   async save(cloner) {
     const job = await JobService.create({
       sourceEnvironment: ObjectId("62459d83bf59719b8be91786"),
@@ -130,7 +219,7 @@ class ClonerService {
       await JobService.update(job);
     }
 
-    main({
+    await main({
       source: {
         connection: cloner.source.connection,
         dbName: cloner.source.dbName,

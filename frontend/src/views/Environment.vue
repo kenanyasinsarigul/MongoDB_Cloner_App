@@ -117,7 +117,7 @@
             href="javascript:;"
             @click="setSelectedEntity(environment)"
           >
-            Update
+            Edit
           </a>
         </div>
         <!-- End Body -->
@@ -171,7 +171,7 @@ export default {
     };
   },
   async mounted() {
-    this.$vToastify.setSettings({ position: "top-right", theme: "light" });
+    this.$vToastify.setSettings({ position: "top-right", theme: "light", canTimeout: false });
     this.reset();
   },
   methods: {

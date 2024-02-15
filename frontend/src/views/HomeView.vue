@@ -293,12 +293,12 @@ export default {
           dbName: null,
           reCreate: false,
         },
-        ignoreList: ["log", "client*"],
+        ignoreList: ["log"],
       },
     };
   },
   async mounted() {
-    this.$vToastify.setSettings({ position: "top-right", theme: "light" });
+    this.$vToastify.setSettings({ position: "top-right", theme: "light", canTimeout: false });
     const { data } = await this.getEnvironments();
     this.environments = data;
   },
