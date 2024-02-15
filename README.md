@@ -32,7 +32,7 @@
 # Create Image
 
 ```
-docker build -t phexum/mongodb_cloner:latest .
+docker build --platform linux/amd64 -t phexum/mongodb_cloner:latest .
 ```
 
 # Push Image
@@ -41,11 +41,22 @@ docker build -t phexum/mongodb_cloner:latest .
 docker login
 docker push phexum/mongodb_cloner:latest
 ```
+ 
+
 
 # Run Container 
 
 ```
-docker run -p 9090:8080 -e DB_CONNECTION=mongodb://host.docker.internal:27017/cloner -e PAGINATION_LIMIT=1000 -d --name cloner  phexum/mongodb_cloner:latest
+
+
+docker run -p 9090:8080 -e DB_CONNECTION=mongodb://host.docker.internal:27017/cloner -e PAGINATION_LIMIT=500 -e EMAIL_HOST=smtp.office365.com -e EMAIL_PORT=587 -e EMAIL_ACCOUNT=<email> -e EMAIL_PWD=<password> -e EMAIL_FROM='"<name>" <<mail>>' -e EMAIL_TO='<email1,email2>' -d --name cloner  phexum/mongodb_cloner:latest
+
+```
+
+or with env file
+
+```
+docker run -p 9090:8080 --env-file ./.env --add-host host.docker.internal:host-gateway -d --name cloner  phexum/mongodb_cloner:latest
 ```
 
 then go to -> http://localhost:9090
