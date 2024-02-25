@@ -25,9 +25,15 @@
 <br>
 
 ## Screenshots of The Project
-
-<img width="1440" alt="Screenshot_2022-11-25_at_10 46 15" src="https://user-images.githubusercontent.com/51781007/203929333-663dda1a-4658-405e-a4dc-ea9a2096779f.png">
-<img width="1440" alt="Screenshot_2022-11-25_at_10 46 43" src="https://user-images.githubusercontent.com/51781007/203929311-4eb56337-f42f-4b66-a2c6-64c9b0355bdf.png">
+<img width="1440" alt="Screenshot_2022-11-25_at_10 46 43" src="https://github.com/kenanyasinsarigul/MongoDB_Cloner_App/assets/51781007/e810f571-1f1a-46c7-97f7-a03bcc1ab218">
+<img width="1440" alt="Screenshot_2022-11-25_at_10 46 43" src="https://github.com/kenanyasinsarigul/MongoDB_Cloner_App/assets/51781007/30b31c4a-ce7a-44a3-9f46-be9c486dd2c9">
+<img width="1440" alt="Screenshot_2022-11-25_at_10 46 43" src="https://github.com/kenanyasinsarigul/MongoDB_Cloner_App/assets/51781007/af8f2e05-9db2-48d5-848d-86fc99ac8a5c">
+<img width="1440" alt="Screenshot_2022-11-25_at_10 46 43" src="https://github.com/kenanyasinsarigul/MongoDB_Cloner_App/assets/51781007/f82078d0-238e-4290-812b-7855ed71a4ed">
+<img width="1440" alt="Screenshot_2022-11-25_at_10 46 43" src="https://github.com/kenanyasinsarigul/MongoDB_Cloner_App/assets/51781007/526b5a82-1d5f-4545-801b-a23f3728a227">
+<img width="1440" alt="Screenshot_2022-11-25_at_10 46 43" src="https://github.com/kenanyasinsarigul/MongoDB_Cloner_App/assets/51781007/a918ee14-d133-4a33-b569-4e29ff467059">
+<img width="1440" alt="Screenshot_2022-11-25_at_10 46 43" src="https://github.com/kenanyasinsarigul/MongoDB_Cloner_App/assets/51781007/575eeb14-17ee-4dda-b6e3-a1d74c50b700">
+<img width="1440" alt="Screenshot_2022-11-25_at_10 46 43" src="https://github.com/kenanyasinsarigul/MongoDB_Cloner_App/assets/51781007/851461cd-6390-470f-8e1e-66b5add515b6">
+<img width="1440" alt="Screenshot_2022-11-25_at_10 46 43" src="https://github.com/kenanyasinsarigul/MongoDB_Cloner_App/assets/51781007/f7bcb07f-0607-4593-98f9-3ce08e786974">
 
 # Create Image
 
