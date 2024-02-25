@@ -1,179 +1,297 @@
 <template>
   <div>
-    <MenuNavBar />
-    <div class="container">
-      <!-- Card -->
-      <div class="card mt-3 shadow-lg p-3 bg-white rounded">
-        <div class="card-header border-bottom">
-          <h4 class="card-header-title">MONGO DATABASE CLONER</h4>
-        </div>
+    <b-card style="margin-bottom: 1.5rem">
+      <b-form>
+        <b-row id="input-group-1" style="margin-bottom: 2rem; margin-top: 2rem">
+          <b-col md="1"></b-col>
+          <b-col md="2" style="text-align: left; padding-top: 0.5rem">
+            <b-label style="color: black; text-decoration: underline;"> Environment Name : </b-label>
+          </b-col>
+          <b-col md="8">
+            <b-form-group>
+              <b-form-input
+                id="input-1"
+                v-model="entity.name"
+                placeholder="New Environment"
+                required
+              ></b-form-input>
+            </b-form-group>
+          </b-col>
+          <b-col md="1"></b-col>
+        </b-row>
+        <b-row id="input-group-1" style="margin-bottom: 2rem">
+          <b-col md="1"></b-col>
+          <b-col md="2" style="text-align: left; padding-top: 0.5rem">
+            <b-label style="color: black; text-decoration: underline;"> Connection String : </b-label>
+          </b-col>
+          <b-col md="8">
+            <b-form-group>
+              <b-form-input
+                id="input-1"
+                v-model="entity.connection"
+                placeholder="example://localhost:8080"
+                required
+              ></b-form-input>
+            </b-form-group>
+          </b-col>
+          <b-col md="1"></b-col>
+        </b-row>
+        <b-row id="input-group-1" style="margin-bottom: 2rem">
+          <b-col md="1"></b-col>
+          <b-col md="2" style="text-align: left; padding-top: 0.5rem">
+            <b-label style="color: black; text-decoration: underline;"> Database Name : </b-label>
+          </b-col>
+          <b-col md="8">
+            <b-form-group>
+              <b-form-input
+                id="input-1"
+                v-model="entity.dbName"
+                placeholder="New Database"
+                required
+              ></b-form-input>
+            </b-form-group>
+          </b-col>
+          <b-col md="1"></b-col>
+        </b-row>
+        <b-row id="input-group-1" style="margin-bottom: 2rem">
+          <b-col md="1"></b-col>
+          <b-col md="2" style="text-align: left; padding-top: 0.5rem">
+            <b-label style="color: black"> Description : </b-label>
+          </b-col>
+          <b-col md="8">
+            <b-form-group>
+              <b-form-textarea
+                id="input-4"
+                v-model="entity.description"
+                size="lg"
+                placeholder="This is a new environment..."
+              ></b-form-textarea>
+            </b-form-group>
+          </b-col>
+          <b-col md="1"></b-col>
+        </b-row>
+        <b-row id="input-group-1" style="margin-bottom: 2rem">
+          <b-col md="1"></b-col>
+          <b-col md="2"></b-col>
+          <b-col md="8">
+            <b-button
+              variant="primary"
+              style="margin-right: 1rem"
+              @click="check()"
+              >Save</b-button
+            >
+            <b-button variant="danger" @click="resetForm()">Reset</b-button>
+          </b-col>
+          <b-col md="1"></b-col>
+        </b-row>
+      </b-form>
+    </b-card>
 
-        <!-- Body -->
-        <div class="card-body">
-          <div>
-            <!-- Form -->
-            <div class="row mb-4">
-              <label class="col-sm-2 col-form-label form-label">Name : </label>
-              <div class="col-sm-9">
-                <input
-                  v-model="entity.name"
-                  type="text"
-                  class="form-control"
-                  placeholder="Name"
-                />
-              </div>
-            </div>
-            <div class="row mb-4">
-              <label class="col-sm-2 col-form-label form-label">
-                Connection :
-              </label>
-
-              <div class="col-sm-9">
-                <input
-                  v-model="entity.connection"
-                  type="text"
-                  class="form-control"
-                  placeholder="Connection String"
-                />
-              </div>
-            </div>
-
-            <div class="row mb-4">
-              <label class="col-sm-2 col-form-label form-label">
-                Db Name :
-              </label>
-
-              <div class="col-sm-9">
-                <input
-                  v-model="entity.dbName"
-                  type="text"
-                  class="form-control"
-                  placeholder="Database Name"
-                />
-              </div>
-            </div>
-
-            <div class="row mb-4">
-              <label class="col-sm-2 col-form-label form-label">
-                Description :
-              </label>
-
-              <div class="col-sm-9">
-                <textarea
-                  v-model="entity.description"
-                  type="text"
-                  class="form-control"
-                  placeholder="Description"
-                ></textarea>
-              </div>
-            </div>
-
-            <div class="row mb-4">
-              <div class="col-4">
-                <a
-                  class="btn btn-primary"
-                  href="javascript:;"
-                  data-bs-toggle="modal"
-                  data-bs-target="#confirmSave"
-                >
-                  Save
-                </a>
-              </div>
-            </div>
-            <!-- End Form -->
-          </div>
-        </div>
-        <!-- End Body -->
-      </div>
-      <!-- End Card -->
-
-      <!-- Card -->
-      <div
-        v-for="environment in environments"
-        :key="environment._id"
-        class="card mt-3 shadow-lg p-3 bg-white rounded"
-      >
-        <!-- Body -->
-        <div class="card-body">
-          <h5>
-            {{ environment.name }}
-          </h5>
-          <div><b>Connection:</b> {{ environment.connection }}</div>
-          <div><b>Db Name: </b>{{ environment.dbName }}</div>
-          <div>{{ environment.connection }}</div>
-          <hr />
-          <a
-            class="btn btn-danger btn-xs"
-            href="javascript:;"
-            @click="setDeletedEntity(environment)"
-            data-bs-toggle="modal"
-            data-bs-target="#confirmRemove"
-          >
-            Delete
-          </a>
-
-          <a
-            class="btn btn-warning btn-xs ml-2 mr-2"
-            href="javascript:;"
-            @click="setSelectedEntity(environment)"
-          >
-            Edit
-          </a>
-        </div>
-        <!-- End Body -->
-      </div>
-      <!-- End Card -->
-
-      <!-- End Col -->
-      <!-- End Row -->
+    <div v-for="environment in environments" :key="environment._id">
+      <b-card style="margin-bottom: 1.5rem">
+        <b-row class="row">
+          <b-col md="1"></b-col>
+          <b-col md="2" style="padding-top: 2rem">
+            <b-button
+              variant="outline-danger"
+              size="sm"
+              @click="
+                $bvModal.show('delete-modal'), setDeletedEntity(environment)
+              "
+              style="margin-right: 1rem; width: 50%; margin-bottom: 1rem"
+              >Delete</b-button
+            >
+            <b-button
+              variant="outline-success"
+              size="sm"
+              @click="
+                $bvModal.show('edit-modal'), setSelectedEntity(environment)
+              "
+              style="margin-right: 1rem; width: 50%"
+              >Edit</b-button
+            >
+          </b-col>
+          <b-col md="8">
+            <Label
+              ><span style="color: darkgreen">Environment Name : </span
+              ><Strong style="text-transform: uppercase; color: black">{{
+                environment.name
+              }}</Strong></Label
+            >
+            <hr />
+            <Label
+              ><span style="color: darkslateblue">Connection String : </span
+              ><span style="color: black">{{
+                environment.connection
+              }}</span></Label
+            >
+            <br />
+            <Label
+              ><span style="color: darkslateblue">Database Name : </span
+              ><span style="color: black">{{ environment.dbName }}</span></Label
+            >
+            <hr />
+            <Label
+              ><span style="color: brown">Description : </span>
+              <span style="color: black">{{ environment.description }}</span>
+            </Label>
+          </b-col>
+          <b-col md="1"></b-col>
+        </b-row>
+      </b-card>
     </div>
-    <ConfirmModal
-      id="confirmSave"
-      @yesClick="save"
-      title="Are you sure to save?"
-      noButton="No"
-      yesButton="Yes"
-    />
-    <ConfirmModal
-      id="confirmRemove"
-      @yesClick="remove"
-      title="Are you sure to delete?"
-      noButton="No"
-      yesButton="Yes"
-    />
+    <b-modal
+      id="delete-modal"
+      size="sm"
+      button-size="sm"
+      centered
+      hide-header-close
+    >
+      <template #modal-header> </template>
+      <template #default>
+        Do you really want to delete this environment?
+      </template>
+      <template #modal-footer="{ ok, cancel }">
+        <!-- Emulate built in modal footer ok and cancel button actions -->
+        <b-button size="sm" variant="danger" @click="remove(), ok()">
+          Delete
+        </b-button>
+        <b-button size="sm" variant="secondary" @click="cancel()">
+          Cancel
+        </b-button>
+      </template>
+    </b-modal>
+    <b-modal
+      id="edit-modal"
+      size="lg"
+      button-size="lg"
+      centered
+      hide-header-close
+    >
+      <template #modal-header> </template>
+      <template #default>
+        <b-form>
+          <b-row
+            id="input-group-1"
+            style="margin-bottom: 2rem; margin-top: 2rem"
+          >
+            <b-col md="1"></b-col>
+            <b-col md="2" style="text-align: left; padding-top: 0.5rem">
+              <b-label style="color: black"> Environment Name : </b-label>
+            </b-col>
+            <b-col md="8">
+              <b-form-group>
+                <b-form-input
+                  id="input-1"
+                  v-model="modalEntity.name"
+                  placeholder="New Environment"
+                  required
+                ></b-form-input>
+              </b-form-group>
+            </b-col>
+            <b-col md="1"></b-col>
+          </b-row>
+          <b-row id="input-group-1" style="margin-bottom: 2rem">
+            <b-col md="1"></b-col>
+            <b-col md="2" style="text-align: left; padding-top: 0.5rem">
+              <b-label style="color: black"> Connection String : </b-label>
+            </b-col>
+            <b-col md="8">
+              <b-form-group>
+                <b-form-input
+                  id="input-1"
+                  v-model="modalEntity.connection"
+                  placeholder="example://localhost:8080"
+                  required
+                ></b-form-input>
+              </b-form-group>
+            </b-col>
+            <b-col md="1"></b-col>
+          </b-row>
+          <b-row id="input-group-1" style="margin-bottom: 2rem">
+            <b-col md="1"></b-col>
+            <b-col md="2" style="text-align: left; padding-top: 0.5rem">
+              <b-label style="color: black"> Database Name : </b-label>
+            </b-col>
+            <b-col md="8">
+              <b-form-group>
+                <b-form-input
+                  id="input-1"
+                  v-model="modalEntity.dbName"
+                  placeholder="New Database"
+                  required
+                ></b-form-input>
+              </b-form-group>
+            </b-col>
+            <b-col md="1"></b-col>
+          </b-row>
+          <b-row id="input-group-1" style="margin-bottom: 2rem">
+            <b-col md="1"></b-col>
+            <b-col md="2" style="text-align: left; padding-top: 0.5rem">
+              <b-label style="color: black"> Description : </b-label>
+            </b-col>
+            <b-col md="8">
+              <b-form-group>
+                <b-form-textarea
+                  id="input-4"
+                  v-model="modalEntity.description"
+                  size="lg"
+                  placeholder="This is a new environment..."
+                ></b-form-textarea>
+              </b-form-group>
+            </b-col>
+            <b-col md="1"></b-col>
+          </b-row>
+          <b-row id="input-group-1" style="margin-bottom: 2rem">
+            <b-col md="1"></b-col>
+            <b-col md="2"></b-col>
+            <b-col md="8"> </b-col>
+            <b-col md="1"></b-col>
+          </b-row>
+        </b-form>
+      </template>
+      <template #modal-footer="{ ok, cancel }">
+        <!-- Emulate built in modal footer ok and cancel button actions -->
+        <b-button size="sm" variant="success" @click="edit(), ok()">
+          Update
+        </b-button>
+        <b-button size="sm" variant="secondary" @click="cancel()">
+          Cancel
+        </b-button>
+      </template>
+    </b-modal>
   </div>
 </template>
 
 <script>
-import ConfirmModal from "../components/ConfirmModal.vue";
 import { mapActions } from "vuex";
-import MenuNavBar from "../components/menu-navbar.vue";
 
 const schema = {
-  connection: undefined,
-  name: undefined,
-  dbName: undefined,
-  description: undefined,
+  connection: null,
+  name: null,
+  dbName: null,
+  description: null,
 };
 
 export default {
-  components: {
-    ConfirmModal,
-    MenuNavBar,
-  },
-
   data() {
     return {
       environments: [],
       deleteEntity: null,
-
       entity: { ...schema },
+      modalEntity: { ...schema },
     };
   },
+
   async mounted() {
-    this.$vToastify.setSettings({ position: "top-right", theme: "light", canTimeout: false });
+    this.$vToastify.setSettings({
+      position: "top-right",
+      theme: "light",
+      canTimeout: false,
+    });
     this.reset();
   },
+
   methods: {
     ...mapActions({
       create: "Environment/create",
@@ -181,35 +299,63 @@ export default {
       delete: "Environment/delete",
       list: "Environment/list",
     }),
+
+    resetForm() {
+      this.entity.name = null;
+      this.entity.connection = null;
+      this.entity.dbName = null;
+      this.entity.description = null;
+    },
+
     async save() {
       if (this.entity._id) {
         await this.update(this.entity);
       } else {
         await this.create(this.entity);
       }
-
       this.$vToastify.success("Environment Created.", "Success!");
       this.reset();
     },
+
+    async edit() {
+      await this.update(this.modalEntity);
+      this.$vToastify.success("Environment Updated.", "Success!");
+      this.reset();
+    },
+
     async remove() {
       await this.delete(this.deleteEntity._id);
-
       this.$vToastify.success("Environment Deleted.", "Success!");
       this.reset();
     },
+
     async reset() {
       this.entity = { ...schema };
       const { data } = await this.list();
       this.environments = data;
     },
+
     setDeletedEntity(item) {
       this.deleteEntity = item;
     },
+
     setSelectedEntity(item) {
-      this.entity = { ...item };
+      this.modalEntity = { ...item };
+    },
+    check() {
+      if (
+        this.entity.name === null ||
+        this.entity.connection === null ||
+        this.entity.dbName === null
+      ) {
+        this.$vToastify.warning("Please fill required inputs!", "Warning!");
+      }else{
+        this.save();
+      }
     },
   },
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+</style>

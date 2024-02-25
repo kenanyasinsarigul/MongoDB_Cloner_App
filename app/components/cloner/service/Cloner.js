@@ -94,7 +94,7 @@ class ClonerService {
         subject: (response.some((i) => i.job.anyError) ? "⛔️" : "✅") + " Tunesoft Regtech Backup Tool",
         html: content,
       });
-      console.log("mail gönderildi");
+      console.log("mail sended!");
     } catch (error) {
       console.error(error);
     }
@@ -153,12 +153,12 @@ class ClonerService {
         return true;
       });
 
-      console.log("===============Liste Başlangıç=======================");
+      console.log("===============Start of List=======================");
       console.log(
         "Kopyalanacak Collection Listesi",
         filteredCollections.map((a) => a.name)
       );
-      console.log("=================Liste Bitiş=========================");
+      console.log("=================End of List=========================");
 
       let anyError = false;
 
@@ -170,7 +170,7 @@ class ClonerService {
 
           await JobItemService.create({
             collectionName: c.name,
-            message: c.name + " Kopyalanıyor...",
+            message: c.name + " copying...",
             type: "info",
             job,
           });
@@ -191,7 +191,7 @@ class ClonerService {
                 anyError = true;
                 await JobItemService.create({
                   collectionName: c.name,
-                  message: c.name + " Hata",
+                  message: c.name + " ERROR",
                   error: error.message,
                   type: "error",
                   job,
@@ -205,7 +205,7 @@ class ClonerService {
 
           await JobItemService.create({
             collectionName: c.name,
-            message: c.name + " (" + totalCollectionData + ")" + " kopyalandı!",
+            message: c.name + " (" + totalCollectionData + ")" + " copied!",
             type: "info",
             job,
           });

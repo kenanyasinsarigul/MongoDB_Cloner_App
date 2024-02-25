@@ -1,109 +1,164 @@
 <template>
-  <div>
-    <MenuNavBar />
-    <div class="container">
-      <!-- Card -->
-      <div class="card mt-3 shadow-lg p-3 bg-white rounded">
-        <div class="card-header border-bottom">
-          <h4 class="card-header-title">SCHEDULE</h4>
-        </div>
-
-        <!-- Body -->
-        <div class="card-body">
-          <div>
-            <!-- Form -->
-
-            <div class="row mb-4">
-              <div class="col-md-2">
-                <b-form-timepicker
-                  id="timepicker-buttons"
-                  now-button
-                  reset-button
-                  size="sm"
-                  locale="en"
-                  dropright
-                  placeholder=""
-                  no-close-button
-                  v-model="selectedTime"
-                ></b-form-timepicker>
-                <br />
-                <a class="btn btn-primary" style="width: 100%" @click="save()">
-                  Save
-                </a>
-                <a
-                  class="btn btn-danger"
-                  style="width: 100%; margin-top: 1rem"
-                  @click="onDemandClone()"
-                  v-if="condition"
-                >
-                  Clone Now
-                </a>
-                <div
-                  class="spinner-border text-danger"
-                  style="margin-top: 1rem"
-                  role="status"
-                  v-if="!condition"
-                ></div>
-                <div
-                  class="spinner-grow text-danger"
-                  style="margin-top: 1rem; margin-left:0.2rem;"
-                  role="status"
-                  v-if="!condition"
-                ></div>
-              </div>
-              <div class="col-md-4">
-                <div class="row">
-                  <div class="col-sm-1"></div>
-                  <div class="col-sm-4">
-                    <label><strong>Source : </strong></label>
-                  </div>
-                  <div class="col-sm-7">
-                    <b-form-group v-slot="{ ariaDescribedby }">
-                      <b-form-checkbox-group
-                        id="checkbox-group-1"
-                        v-model="selectedList"
-                        :options="environmentsOptions"
-                        :aria-describedby="ariaDescribedby"
-                        name="flavour-1"
-                      ></b-form-checkbox-group>
-                    </b-form-group>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-1">
-                <label><strong>---></strong></label>
-              </div>
-              <div class="col-md-4">
-                <div class="row">
-                  <div class="col-sm-1"></div>
-                  <div class="col-sm-4">
-                    <label><strong>Target : </strong></label>
-                  </div>
-                  <div class="col-sm-7">
-                    <b-form-radio-group
-                      id="radio-group-1"
-                      v-model="selected"
-                      :options="environmentsOptions"
-                      name="radio-options"
-                    ></b-form-radio-group>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- End Form -->
-          </div>
-        </div>
-        <!-- End Body -->
-      </div>
-      <!-- End Card -->
-    </div>
+  <div class="body" style="min-height: 680px;">
+    <b-card style="margin-bottom: 1.5rem">
+      <b-form>
+        <b-row id="input-group-1" style="margin-bottom: 1rem">
+          <b-col md="3">
+            <b-label
+              class="form-control bg-light"
+              style="color: black; text-align: center; font-weight: bold;"
+            >
+              Select The Schedule Time</b-label
+            >
+          </b-col>
+          <b-col md="3">
+            <b-label
+              class="form-control bg-light"
+              style="color: black; text-align: center; font-weight: bold;"
+            >
+              Select Sources</b-label
+            >
+          </b-col>
+          <b-col md="3">
+            <b-label
+              class="form-control bg-light"
+              style="color: black; text-align: center; font-weight: bold;"
+            >
+              Select The Target</b-label
+            >
+          </b-col>
+          <b-col md="3">
+            <b-label
+              class="form-control bg-light"
+              style="color: black; text-align: center; font-weight: bold;"
+            >
+              Select Actions</b-label
+            >
+          </b-col>
+        </b-row>
+        <b-row id="input-group-2">
+          <b-col md="3">
+            <b-card style="min-height: 275px">
+              <b-time class="rounded" v-model="selectedTime" locale="en"></b-time>
+              <hr />
+              <b-button
+                variant="outline-success"
+                size="xs"
+                style="margin-right: 1rem; width: 45%; float: left"
+                @click="setNowTime()"
+                >Set Now</b-button
+              >
+              <b-button
+                variant="outline-danger"
+                size="xs"
+                style="width: 45%; float: left"
+                @click="resetTime()"
+                >Reset</b-button
+              >
+            </b-card>
+          </b-col>
+          <b-col md="3">
+            <b-card style="min-height: 275px">
+              <b-form-group>
+                <b-form-checkbox-group
+                  id="checkbox-group-1"
+                  v-model="selectedList"
+                  :options="environmentsOptions"
+                  class="materialCheckboxSource"
+                  size="md"
+                ></b-form-checkbox-group>
+              </b-form-group>
+            </b-card>
+          </b-col>
+          <b-col md="3">
+            <b-card style="min-height: 275px">
+              <b-form-group>
+                <b-form-radio-group
+                  id="radio-group-2"
+                  v-model="selected"
+                  :options="environmentsOptions"
+                  class="materialCheckboxTarget"
+                  size="md"
+                ></b-form-radio-group>
+              </b-form-group>
+            </b-card>
+          </b-col>
+          <b-col md="3">
+            <b-card style="min-height: 275px">
+              <b-button
+                variant="primary"
+                style="margin-right: 1rem; width: 100%"
+                @click="$bvModal.show('save-modal')"
+                >Save Schedule</b-button
+              >
+              <br />
+              <b-button
+                variant="success"
+                style="margin-top: 1rem; width: 100%"
+                @click="$bvModal.show('backup-modal')"
+                >Backup Now</b-button
+              >
+              <br>
+              <div
+                class="spinner-border text-success"
+                style="margin-top: 1rem"
+                role="status"
+                v-if="!condition"
+              ></div>
+              <div
+                class="spinner-grow text-success"
+                style="margin-top: 1rem; margin-left: 0.2rem"
+                role="status"
+                v-if="!condition"
+              ></div>
+            </b-card>
+          </b-col>
+        </b-row>
+      </b-form>
+    </b-card>
+    <b-modal
+      id="save-modal"
+      size="sm"
+      button-size="sm"
+      centered
+      hide-header-close
+    >
+      <template #modal-header> </template>
+      <template #default> Do you really want to save the schedule? </template>
+      <template #modal-footer="{ ok, cancel }">
+        <!-- Emulate built in modal footer ok and cancel button actions -->
+        <b-button size="sm" variant="success" @click="save(), ok()">
+          Okay
+        </b-button>
+        <b-button size="sm" variant="secondary" @click="cancel()">
+          Cancel
+        </b-button>
+      </template>
+    </b-modal>
+    <b-modal
+      id="backup-modal"
+      size="sm"
+      button-size="sm"
+      centered
+      hide-header-close
+    >
+      <template #modal-header> </template>
+      <template #default> Do you really want to start the backup process? </template>
+      <template #modal-footer="{ ok, cancel }">
+        <!-- Emulate built in modal footer ok and cancel button actions -->
+        <b-button size="sm" variant="success" @click="onDemandClone(), ok()">
+          Okay
+        </b-button>
+        <b-button size="sm" variant="secondary" @click="cancel()">
+          Cancel
+        </b-button>
+      </template>
+    </b-modal>
   </div>
 </template>
 
 <script>
 import { mapActions } from "vuex";
-import ConfirmModal from "../components/ConfirmModal.vue";
-import MenuNavBar from "../components/menu-navbar.vue";
 
 const schema = {
   connection: undefined,
@@ -119,10 +174,6 @@ const payload = {
 };
 
 export default {
-  components: {
-    ConfirmModal,
-    MenuNavBar,
-  },
 
   data() {
     return {
@@ -144,8 +195,6 @@ export default {
       theme: "light",
       canTimeout: false,
     });
-
-    const disableButton = true;
 
     const { data } = await this.getEnvironments();
     const scheduleConfigData = await this.list();
@@ -197,8 +246,35 @@ export default {
       }
       this.$vToastify.success("Clonned Successfully!");
     },
+    setNowTime(){
+      this.selectedTime = new Date().getHours()+":"+new Date().getMinutes()
+    },
+    resetTime(){
+      this.selectedTime = '';
+    }
   },
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.materialCheckboxSource {
+  label {
+    margin-left: 1rem;
+    color: black;
+    font-size: large;
+  }
+  input:hover {
+    cursor: pointer;
+  }
+}
+.materialCheckboxTarget {
+  label {
+    margin-left: 1rem;
+    color: black;
+    font-size: large;
+  }
+  input:hover {
+    cursor: pointer;
+  }
+}
+</style>

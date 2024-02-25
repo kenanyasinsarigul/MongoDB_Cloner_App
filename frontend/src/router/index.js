@@ -1,7 +1,8 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Router from "vue-router";
-import HomeView from "../views/HomeView";
+import Cloner from "../views/Cloner";
+import Main from "../views/Main";
 import EnvironmentView from "../views/Environment";
 import Schedule from "../views/Schedule";
 import { FRONTEND_URL } from "../config/index";
@@ -15,7 +16,11 @@ export default new Router({
   routes: [
     {
       path: "/",
-      component: HomeView,
+      component: Main,
+    },
+    {
+      path: "/cloner",
+      component: Cloner,
     },
     {
       path: "/environments",
