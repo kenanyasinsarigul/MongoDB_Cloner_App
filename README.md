@@ -77,8 +77,7 @@ https://hub.docker.com/r/phexum/mongodb_cloner
 </ul>
 
 ## Acknowledgements
-- Tugay İPEK - <a href="https://github.com/tugayipek1/">Github</a>
-
+-
 ## Author
 Kenan Yasin SARIGÜL - <a href="https://github.com/kenanyasinsarigul/">Github</a>
 
